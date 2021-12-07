@@ -5,7 +5,7 @@ exports.checkAccountPayload = (req, res, next) => {
   const error = { status: 400 };
   const { name, budget } = req.body;
   if (name === undefined || budget === undefined) {
-    error.message = "name & budget are required";
+    error.message = "name and budget are required";
     next(error);
   } else if (typeof name !== "string") {
     error.message = "name of account must be a string";
@@ -47,7 +47,7 @@ exports.checkAccountId = async (req, res, next) => {
   try {
     const acct = await Account.getById(req.params.id);
     if (!acct) {
-      next({ status: 404, message: "not found" });
+      next({ status: 404, message: "account not found" });
     } else {
       req.account = acct;
       next();
